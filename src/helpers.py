@@ -19,7 +19,7 @@ def publish_log():
 
 
 def save_to_file(path, text):
-    md5_hash = md5(text)
+    md5_hash = md5(text.encode('utf8'))
     with open('data/%s/%s' % (path, md5_hash), 'w') as file:
         file.write(text.encode('utf8'))
     return md5_hash

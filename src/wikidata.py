@@ -26,6 +26,7 @@ def get_new_item(repo, list_page, title):
     item = pywikibot.ItemPage(repo)
     data = get_label_data(title, list_page)
     item.editEntity(data, summary=item_create_summary % list_page.title())
+    return item
 
 
 def add_source(repo, list_page, claim):
