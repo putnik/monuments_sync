@@ -3,6 +3,7 @@
 import pywikibot
 
 PROPERTY_FUNCTIONS = {
+    'P17': 'get_item',
     'P31': 'get_item',
     'P131': 'get_item',
     'P625': 'get_coordinate',
