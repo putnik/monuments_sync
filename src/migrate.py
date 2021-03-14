@@ -36,7 +36,7 @@ def update_item_claims(item, template, list_page):
         # exit()  # FIXME
 
 
-def create_item(template, list_page):
+def create_item(template, list_page, code):
     if not template.has('name'):
         log(u'** !!empty name!!')
         return
@@ -49,7 +49,7 @@ def create_item(template, list_page):
     # TODO: description
 
     template.replace('wdid', qid)
-    cache_hash = save_cache(list_page)
+    cache_hash = save_cache(code)
     log(u'** update list: wdid=%s (cache: %s)' % (qid, cache_hash))
 
     update_item_claims(item, template, list_page)
@@ -86,7 +86,7 @@ def process_list_page(list_page):
         debug(template)
         qid = get_qid(template)
         if qid is None:
-            create_item(template, list_page)
+            create_item(template, list_page, code)
             break  # FIXME
         else:
             update_item(template, list_page)
