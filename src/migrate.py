@@ -6,7 +6,7 @@ import pywikibot
 from helpers import log, publish_log, save_cache, debug
 from properties import get_target
 from templates import get_param_value, check_template, get_qid
-from wikidata import add_claim, get_new_item, update_label
+from wikidata import add_claim, get_new_item, get_label, update_label
 from wikivoyage import update_list_page, iterate_category
 
 site = pywikibot.Site('ru', 'wikivoyage')
@@ -65,7 +65,7 @@ def update_item(template, list_page):
         log(u'** !!WRONG wdid!!')
         return
 
-    if item.getLabel() == '':
+    if get_label(item, list_page) == '':
         update_label(item, template.title, list_page)
         log(u'** new label: "%s"' % template.title)
 

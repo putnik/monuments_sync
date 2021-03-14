@@ -17,6 +17,16 @@ def get_label_data(title, page):
     }
 
 
+def get_label(item, list_page):
+    item_dict = item.get()
+    if 'labels' not in item_dict or list_page.site.lang not in item_dict['labels']:
+        return None
+    if item_dict['labels'][list_page.site.lang] == '':
+        return None
+
+    return item_dict['labels'][list_page.site.lang]
+
+
 def update_label(item, title, list_page):
     label_data = get_label_data(title, list_page)
     item.editEntity(label_data, summary=item_update_summary % list_page.title())
