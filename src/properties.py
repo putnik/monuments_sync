@@ -8,6 +8,7 @@ PROPERTY_FUNCTIONS = {
     'P131': 'get_item',
     'P625': 'get_coordinate',
     'P1435': 'get_item',
+    'P6375': 'get_address',
 }
 
 
@@ -22,12 +23,16 @@ def get_label_data(title, page):
     }
 
 
-def get_address(value):
+def get_address(value, repo):
     return ', '.join(value)
 
 
-def get_coordinate(value):
+def get_coordinate(value, repo):
     return pywikibot.Coordinate(lat=float(value[1]), lon=float(value[2]))
+
+
+def get_item(value, repo):
+    return pywikibot.ItemPage(repo, value)
 
 
 def get_target(repo, pid, value):
@@ -35,4 +40,4 @@ def get_target(repo, pid, value):
         return value
 
     function_name = PROPERTY_FUNCTIONS[pid]
-    return locals()[function_name](value)
+    return locals()[function_name](value, repo)
