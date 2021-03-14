@@ -2,19 +2,12 @@
 
 import pywikibot
 
-TYPE_COMMONS_MEDIA = 'commonsMedia'
-TYPE_EXTERNAL_ID = 'external-id'
 TYPE_GLOBE_COORDINATE = 'globe-coordinate'
 TYPE_ITEM = 'item'
-TYPE_STRING = 'string'
 
 PROPERTY_TYPES = {
-    'P18': TYPE_COMMONS_MEDIA,
     'P131': TYPE_ITEM,
-    'P373': TYPE_STRING,
     'P625': TYPE_GLOBE_COORDINATE,
-    'P1483': TYPE_EXTERNAL_ID,
-    'P5381': TYPE_EXTERNAL_ID,
 }
 
 
@@ -34,6 +27,9 @@ def get_coordinate(value):
 
 
 def get_target(repo, pid, value):
+    if pid not in PROPERTY_TYPES:
+        return value
+
     property_type = PROPERTY_TYPES[pid]
     if property_type == TYPE_GLOBE_COORDINATE:
         return get_coordinate(value)
