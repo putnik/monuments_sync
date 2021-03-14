@@ -2,8 +2,8 @@
 
 import pywikibot
 
-item_create_summary = u'Import data from [[wv:ru:%s]]'
-item_update_summary = u'Import updated data from [[wv:ru:%s]]'
+item_create_summary = u'Import data from [[voy:ru:%s]]'
+item_update_summary = u'Import updated data from [[voy:ru:%s]]'
 
 
 def get_label_data(title, page):
