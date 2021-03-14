@@ -2,9 +2,8 @@
 
 import pywikibot
 
-item_create_summary = u'Create item from the data in [[v:ru:%s]]'
-item_update_summary = u'Update item from the data in [[v:ru:%s]]'
-page_update_summary = u'Update data'
+item_create_summary = u'Import data from [[v:ru:%s]]'
+item_update_summary = u'Import updated data from [[v:ru:%s]]'
 
 
 def get_label_data(title, page):
@@ -45,7 +44,7 @@ def add_claim(repo, list_page, item, pid, target):
     item_dict = item.get()
 
     if "claims" in item_dict and pid in item_dict["claims"]:
-        return  # TODO
+        return  # TODO: Find item with correct source if possible
 
     claim = pywikibot.Claim(repo, pid)
     claim.setTarget(target)

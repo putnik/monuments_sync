@@ -37,8 +37,13 @@ def update_item_claims(item, template, list_page):
 
 
 def create_item(template, list_page):
-    item = get_new_item(repo, list_page, template.title)
-    log(u'* (new) [[d:%s]] = "%s"' % (item.title(), template.title))
+    if not template.has('name'):
+        log(u'** !!empty name!!')
+        return
+
+    label = template.get('name').value.strip()
+    item = get_new_item(repo, list_page, label)
+    log(u'* (new) [[d:%s]] = "%s"' % (item.title(), label))
 
     # TODO: description
 
