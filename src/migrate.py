@@ -5,22 +5,12 @@ import pywikibot
 
 from helpers import log, publish_log, save_cache, debug
 from properties import get_target
-from templates import get_param_value, check_template, get_qid
+from templates import get_param_value, check_template, get_qid, PARAM_MAPPING
 from wikidata import add_claim, get_new_item, get_label, update_label
 from wikivoyage import update_list_page, iterate_category
 
 site = pywikibot.Site('ru', 'wikivoyage')
 repo = site.data_repository()
-
-PARAM_MAPPING = {
-    'P18': 'image',
-    'P131': 'munid',
-    'P373': 'commonscat',
-    'P625': ['lat', 'long'],
-    'P1483': 'knid',
-    'P8316': 'sobory',
-    'P5381': 'knid-new',
-}
 
 
 def update_item_claims(item, template, list_page):
