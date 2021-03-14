@@ -19,9 +19,10 @@ def publish_log():
 
 
 def save_to_file(path, text):
+    text = str(text)
     md5_hash = md5(text.encode('utf8'))
     with open('data/%s/%s' % (path, md5_hash), 'w') as file:
-        file.write(text.encode('utf8'))
+        file.write(text)
     return md5_hash
 
 
@@ -31,4 +32,4 @@ def save_cache(text):
 
 def save_diff(old_text, new_text):
     diff = ndiff(old_text.encode('utf8'), new_text.encode('utf8'))
-    return save_to_file('diff', str(diff))
+    return save_to_file('diff', diff)
