@@ -6,8 +6,10 @@ TYPE_GLOBE_COORDINATE = 'globe-coordinate'
 TYPE_ITEM = 'item'
 
 PROPERTY_TYPES = {
+    'P31': TYPE_ITEM,
     'P131': TYPE_ITEM,
     'P625': TYPE_GLOBE_COORDINATE,
+    'P1435': TYPE_ITEM,
 }
 
 
