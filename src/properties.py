@@ -2,14 +2,11 @@
 
 import pywikibot
 
-TYPE_GLOBE_COORDINATE = 'globe-coordinate'
-TYPE_ITEM = 'item'
-
-PROPERTY_TYPES = {
-    'P31': TYPE_ITEM,
-    'P131': TYPE_ITEM,
-    'P625': TYPE_GLOBE_COORDINATE,
-    'P1435': TYPE_ITEM,
+PROPERTY_FUNCTIONS = {
+    'P31': 'get_item',
+    'P131': 'get_item',
+    'P625': 'get_coordinate',
+    'P1435': 'get_item',
 }
 
 
@@ -24,18 +21,17 @@ def get_label_data(title, page):
     }
 
 
+def get_address(value):
+    return ', '.join(value)
+
+
 def get_coordinate(value):
     return pywikibot.Coordinate(lat=float(value[1]), lon=float(value[2]))
 
 
 def get_target(repo, pid, value):
-    if pid not in PROPERTY_TYPES:
+    if pid not in PROPERTY_FUNCTIONS:
         return value
 
-    property_type = PROPERTY_TYPES[pid]
-    if property_type == TYPE_GLOBE_COORDINATE:
-        return get_coordinate(value)
-    if property_type == TYPE_ITEM:
-        return pywikibot.ItemPage(repo, value)
-
-    return value
+    function_name = PROPERTY_FUNCTIONS[pid]
+    return locals()[function_name](value)

@@ -3,6 +3,7 @@
 import re
 
 PARAM_MAPPING = {
+    'P17': 'region',
     'P18': 'image',
     'P31': 'type',
     'P131': 'munid',
@@ -11,6 +12,7 @@ PARAM_MAPPING = {
     'P1435': 'protection',
     'P1483': 'knid',
     'P5381': 'knid-new',
+    'P6375': ['municipality', 'address'],
 }
 
 PROTECTION_VALUES = {
@@ -33,6 +35,15 @@ def get_protection_value(value):
     if value in PROTECTION_VALUES:
         return PROTECTION_VALUES[value]
     return None
+
+
+def get_region_value(value):
+    if not re.match("^ru-[a-z]+$", value):
+        return None
+    if value in ('ru-km', 'ru-sev'):
+        # TODO: Add Ukraine
+        pass
+    return 'Q159'
 
 
 def get_type_value(value):
@@ -59,6 +70,8 @@ def get_param_value(template, param):
 
     if param == 'protection':
         return get_protection_value(value)
+    if param == 'region':
+        return get_region_value(value)
     if param == 'type':
         return get_type_value(value)
 
