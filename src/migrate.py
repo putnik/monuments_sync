@@ -22,7 +22,7 @@ def update_item_claims(item, template, list_page):
 
         log(u'** %s = "%s"' % (pid, value))
         target = get_target(repo, pid, value)
-        add_claim(repo, list_page, item, pid, target)
+        add_claim(repo, list_page, item, pid, target, template)
 
 
 def create_item(template, list_page, code):

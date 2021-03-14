@@ -38,7 +38,7 @@ def get_protection_value(value):
 
 
 def get_region_value(value):
-    if not re.match("^ru-[a-z]+$", value):
+    if not re.fullmatch("ru-[a-z]+", value):
         return None
     if value in ('ru-km', 'ru-sev'):
         # TODO: Add Ukraine
@@ -87,7 +87,7 @@ def get_qid(template):
     if template.has("wdid"):
         qid = template.get("wdid").value.strip()
 
-    if re.match("^Q\\d+$", qid):
+    if re.fullmatch("Q\\d+", qid):
         return qid
 
     return None

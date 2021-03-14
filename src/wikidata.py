@@ -39,19 +39,21 @@ def get_new_item(repo, list_page, title):
     return item
 
 
-def add_source(repo, list_page, claim):
+def add_source(repo, list_page, claim, template):
     ruwv_claim = pywikibot.Claim(repo, 'P143')
     ruwv_target = pywikibot.ItemPage(repo, 'Q17601812')
     ruwv_claim.setTarget(ruwv_target)
 
     page_claim = pywikibot.Claim(repo, 'P4656')
     page_target = 'https://ru.wikivoyage.org/?oldid=%s' % list_page.latest_revision_id
+    if template.has('knid'):
+        page_target += '#' + template.get('knid').value.strip()
     page_claim.setTarget(page_target)
 
     claim.addSources([ruwv_claim, page_claim])
 
 
-def add_claim(repo, list_page, item, pid, target):
+def add_claim(repo, list_page, item, pid, target, template):
     item_dict = item.get()
 
     if "claims" in item_dict and pid in item_dict["claims"]:
