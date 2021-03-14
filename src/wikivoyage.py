@@ -12,7 +12,7 @@ def iterate_category(site, action, category_name=u'Категория:Списк
         action(list_page)
 
 
-def update_list_page(list_page, old_text, new_text, page_update_summary=u'Update data'):
+def update_list_page(list_page, old_text, new_text, page_update_summary=u'Бот: Экспорт списков в Викиданные'):
     if new_text != old_text:
         diff = save_diff(old_text, new_text)
         list_page.text = new_text

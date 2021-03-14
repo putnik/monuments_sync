@@ -33,7 +33,6 @@ def update_item_claims(item, template, list_page):
         log(u'** %s = "%s"' % (pid, value))
         target = get_target(repo, pid, value)
         add_claim(repo, list_page, item, pid, target)
-        # exit()  # FIXME
 
 
 def create_item(template, list_page, code):
@@ -48,7 +47,7 @@ def create_item(template, list_page, code):
 
     # TODO: description
 
-    template.replace('wdid', qid)
+    template.add('wdid', qid)
     cache_hash = save_cache(code)
     log(u'** update list: wdid=%s (cache: %s)' % (qid, cache_hash))
 
@@ -86,12 +85,13 @@ def process_list_page(list_page):
         debug(template)
         qid = get_qid(template)
         if qid is None:
-            create_item(template, list_page, code)
-            break  # FIXME
+            continue  # FIXME
+            # create_item(template, list_page, code)
         else:
             update_item(template, list_page)
+            exit()  # FIXME
 
-    diff = update_list_page(list_page, text, code)
+    diff = update_list_page(list_page, text, str(code))
     if diff is None:
         log(u': skipped')
     else:
