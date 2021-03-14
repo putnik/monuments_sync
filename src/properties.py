@@ -24,11 +24,13 @@ def get_label_data(title, page):
 
 
 def get_address(value, repo):
-    return ', '.join(value)
+    address = ', '.join(value)
+    return pywikibot.WbMonolingualText(text=address, language='ru')
 
 
 def get_coordinate(value, repo):
-    return pywikibot.Coordinate(lat=float(value[1]), lon=float(value[2]))
+    precision = max(len(value[0].split('.')[1]), len(value[1].split('.')[1]))
+    return pywikibot.Coordinate(lat=float(value[0]), lon=float(value[1]), precision=0.1 ** precision)
 
 
 def get_item(value, repo):
@@ -40,4 +42,4 @@ def get_target(repo, pid, value):
         return value
 
     function_name = PROPERTY_FUNCTIONS[pid]
-    return locals()[function_name](value, repo)
+    return globals()[function_name](value, repo)
