@@ -43,13 +43,14 @@ def create_item(template, list_page):
 
     label = template.get('name').value.strip()
     item = get_new_item(repo, list_page, label)
-    log(u'* (new) [[d:%s]] = "%s"' % (item.title(), label))
+    qid = 'Q%s' % item.getID()
+    log(u'* (new) [[d:Q%s]] = "%s"' % (qid, label))
 
     # TODO: description
 
-    template.replace('wdid', item.title())
+    template.replace('wdid', qid)
     cache_hash = save_cache(list_page)
-    log(u'** update list: wdid=%s (cache: %s)' % (item.title(), cache_hash))
+    log(u'** update list: wdid=%s (cache: %s)' % (qid, cache_hash))
 
     return template
 
