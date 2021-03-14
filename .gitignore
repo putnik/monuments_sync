@@ -1,0 +1,9 @@
+apicache/*
+apicache-py3/*
+data/cache/*
+data/diff/*
+data/log
+user-*.py
+pywikibot.lwp
+throttle.ctrl
+*.pyc
